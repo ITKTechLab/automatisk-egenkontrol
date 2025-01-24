@@ -179,14 +179,12 @@ for department, df in department_dfs.items():
                 .replace(": ", ":\n")
             ), inplace=True)
 
-            # Tilføjer en separator for året
             html_content += f"""
             <div class="year-separator" style="text-align: center; font-weight: bold; margin-top: 20px; margin-bottom: 20px;">
                 {department} - {year}
             </div>
             """
 
-            # Konverter DataFrame til HTML
             html_table = df_year.to_html(
                 index=False,
                 classes="table table-hover table-striped table-bordered table table-sm",
@@ -194,21 +192,17 @@ for department, df in department_dfs.items():
                 escape=False 
             )
 
-            # Tilføj HTML-sektion for året
             html_content += f"""
             <div class="table-container">
                 {html_table}
             </div>
             """
 
-        # Afslut HTML-strukturen
         html_content += """
         </body>
         </html>
         """
-
-        # Gem HTML-filen direkte i scriptets mappe
-        file_name = os.path.join(f"{department}.html")
+        file_name = os.path.join(os.getcwd(), "temperature_logger", "out_put", f"{department}.html")
         with open(file_name, "w", encoding="utf-8") as file:
             file.write(html_content)
 
